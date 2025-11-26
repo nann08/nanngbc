@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* Retro Game Boy Color Palette */
+        /* Retro Game Boy Color Palette (ADDED: The pea-green aesthetic) */
         :root {
             --screen-color: #9bbc0f; /* Iconic pea-green background */
             --screen-shadow: #0f380f; /* Darker green for shadows/text */
@@ -41,7 +41,7 @@
             /* Updated body color to a soft, slightly off-white (#f8fafc - Tailwind slate-50) */
             background-color: #f8fafc;
             width: 440px; 
-            height: 760px; /* Increased height to better match mobile aspect ratios */
+            height: 760px; /* Restored preferred taller height */
             border-radius: 15px 15px 70px 15px;
             
             /* Enhanced realism for the plastic shell texture and 3D bevel */
@@ -72,7 +72,7 @@
             padding: 20px 30px;
             /* Stronger, deeper inset for the lens cavity */
             box-shadow: inset 0px 0px 20px rgba(0,0,0,0.9),
-                        inset 2px 2px 5px rgba(0,0,0,0.6); /* Additional subtle top-left dark inset */
+                        inset 2px 2px 5px rgba(0,0,0,0.6); 
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -90,7 +90,7 @@
         .power-led {
             width: 10px;
             height: 10px;
-            background-color: #1c1c1c; /* Darker off state */
+            background-color: #1c1c1c; 
             border-radius: 50%;
             box-shadow: inset 1px 1px 2px rgba(0,0,0,0.7);
             transition: background-color 0.2s;
@@ -102,7 +102,7 @@
         }
 
         .lcd-screen {
-            /* RETRO SCREEN STYLING */
+            /* RETRO SCREEN STYLING (UPDATED) */
             background-color: var(--screen-color);
             width: 320px;
             height: 240px;
@@ -113,7 +113,7 @@
             justify-content: center;
             position: relative; 
             
-            /* Add Scanlines/Texture Overlay */
+            /* Add Scanlines/Texture Overlay (ADDED) */
             &::before {
                 content: '';
                 position: absolute;
@@ -145,7 +145,7 @@
             width: 100%;
             height: 100%;
             border: none;
-            /* Make iframe background transparent so the pea-green color shows through */
+            /* Make iframe background transparent so the pea-green color shows through (UPDATED) */
             background-color: transparent; 
         }
 
@@ -158,7 +158,6 @@
             font-size: 28px;
             letter-spacing: 1px;
             margin-top: 15px;
-            /* Removed text-shadow for a clean, non-outlined look */
         }
 
         .controls-area {
@@ -170,7 +169,7 @@
         /* --- D-Pad Styles --- */
         .dpad {
             position: absolute;
-            top: 70px; /* Moved down slightly */
+            top: 70px; 
             left: 40px;
             width: 120px;
             height: 120px;
@@ -233,7 +232,7 @@
             height: 26px;
             border-radius: 50%;
             background: radial-gradient(circle, #000 0%, #1c1c1c 70%);
-            opacity: 0.9; /* More opaque for deeper look */
+            opacity: 0.9; 
         }
 
         /* Invisible Click Targets (same as before) */
@@ -257,11 +256,11 @@
             right: 30px;
             width: 140px;
             height: 70px;
-            transform: rotate(-20deg); /* Slightly less rotation */
+            transform: rotate(-20deg); 
         }
         /* Button style update - More prominent bevels */
         .btn-round {
-            width: 55px; /* Slightly larger */
+            width: 55px; 
             height: 55px;
             background-color: #1c1c1c; 
             border-radius: 50%;
@@ -273,9 +272,9 @@
             justify-content: center;
             /* Enhanced 3D bevel effect for round buttons */
             box-shadow: 
-                inset 3px 3px 8px rgba(255,255,255,0.2), /* Top-left highlight */
-                inset -3px -3px 8px rgba(0,0,0,0.5),    /* Bottom-right shadow */
-                0 6px 0 #000;                          /* Deeper physical shadow */
+                inset 3px 3px 8px rgba(255,255,255,0.2), 
+                inset -3px -3px 8px rgba(0,0,0,0.5),    
+                0 6px 0 #000;                         
             cursor: pointer;
             position: absolute;
             user-select: none;
@@ -284,11 +283,11 @@
         }
         /* Press animation update - deeper press */
         .btn-round:active, .btn-round.pressed {
-            transform: translateY(4px); /* Deeper press */
+            transform: translateY(4px); 
             box-shadow: 
                 inset 3px 3px 8px rgba(255,255,255,0.2), 
                 inset -3px -3px 8px rgba(0,0,0,0.5), 
-                0 2px 0 #000; /* Smaller shadow when pressed */
+                0 2px 0 #000; 
         }
         .btn-b { bottom: 0; left: 0; }
         .btn-a { top: 0; right: 0; }
@@ -300,39 +299,39 @@
             font-size: 14px;
             font-weight: bold;
             color: #7c3aed; 
-            transform: rotate(20deg); /* Adjusted label rotation */
+            transform: rotate(20deg); 
         }
 
         .meta-buttons {
             position: absolute;
-            bottom: 60px; /* Moved down slightly */
+            bottom: 60px; 
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 25px; /* Wider gap */
+            gap: 25px; 
         }
         .btn-pill {
-            width: 65px; /* Longer */
-            height: 16px; /* Thicker */
-            background-color: #6b7280; /* Tailwind gray-500 */
+            width: 65px; 
+            height: 16px; 
+            background-color: #6b7280; 
             border-radius: 12px;
             transform: rotate(-25deg);
             /* Enhanced 3D bevel for pill buttons */
             box-shadow: 
-                inset 2px 2px 5px rgba(255,255,255,0.3), /* Top-left highlight */
-                inset -2px -2px 5px rgba(0,0,0,0.4),    /* Bottom-right shadow */
-                0 5px 0 #374151;                        /* Deeper physical shadow */
+                inset 2px 2px 5px rgba(255,255,255,0.3), 
+                inset -2px -2px 5px rgba(0,0,0,0.4),    
+                0 5px 0 #374151;                        
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
             transition: transform 0.1s, box-shadow 0.1s; 
         }
         /* Press animation update */
         .btn-pill:active, .btn-pill.pressed {
-            transform: rotate(-25deg) translateY(3px); /* Deeper press */
+            transform: rotate(-25deg) translateY(3px); 
             box-shadow: 
                 inset 2px 2px 5px rgba(255,255,255,0.3), 
                 inset -2px -2px 5px rgba(0,0,0,0.4), 
-                0 2px 0 #374151; /* Smaller shadow when pressed */
+                0 2px 0 #374151; 
         }
         .meta-label {
             font-size: 11px;
@@ -344,7 +343,7 @@
             letter-spacing: 0.5px;
         }
 
-        /* --- Menu and Binding Styles (No visual change, keeping previous logic) --- */
+        /* --- Menu and Binding Styles (UPDATED to match green screen look) --- */
         .menu-ui, #key-binding-menu {
             width: 100%;
             height: 100%;
@@ -555,7 +554,7 @@
         let currentObjectUrl = null;
         const screenContainer = document.getElementById('screen-container');
         const powerLed = document.getElementById('power-led');
-        const menuView = document.getElementById('menu-view');
+        const menuView = document.getElementById('menu-view'); // Re-added for launchGame hide/show
         const fileNameDisplay = document.getElementById('file-name');
         const bindingMenu = document.getElementById('key-binding-menu');
         const bindingList = document.getElementById('binding-list');
@@ -564,7 +563,7 @@
         // D-Pad elements for visual feedback
         const dpadHorz = document.getElementById('dpad-horz');
         const dpadVert = document.getElementById('dpad-vert');
-        // Round and Pill buttons for visual feedback reset
+        // Round and Pill buttons for visual feedback reset (IDs re-added in HTML)
         const actionButtons = [
             document.getElementById('btn-A'),
             document.getElementById('btn-B'),
@@ -572,7 +571,7 @@
             document.getElementById('btn-Select')
         ];
         
-        // Global state tracking for virtual buttons (CRITICAL FIX: State Tracking)
+        // Global state tracking for virtual buttons (CRITICAL FIX: State Tracking re-added)
         let virtualKeyStates = {};
 
 
@@ -580,35 +579,27 @@
         let bindingTargetLabel = null;
         const KEY_MAP_STORAGE_KEY = 'nann_key_map';
         
-        // Key data for manual binding selection
+        // Key data for manual binding selection (kept the same)
         const MANUAL_KEY_OPTIONS = [
-            // Directional / Movement keys
             { label: 'W', key: 'w', code: 'KeyW', keyCode: 87 },
             { label: 'A', key: 'a', code: 'KeyA', keyCode: 65 },
             { label: 'S', key: 's', code: 'KeyS', keyCode: 83 },
             { label: 'D', key: 'd', code: 'KeyD', keyCode: 68 },
-            
-            // Common Action Keys
             { label: 'Space', key: ' ', code: 'Space', keyCode: 32 },
             { label: 'Shift', key: 'Shift', code: 'ShiftRight', keyCode: 16 },
             { label: 'Ctrl', key: 'Control', code: 'ControlLeft', keyCode: 17 },
             { label: 'Alt', key: 'Alt', code: 'AltLeft', keyCode: 18 },
-            
-            // Arrow Keys
             { label: '←', key: 'ArrowLeft', code: 'ArrowLeft', keyCode: 37 },
             { label: '→', key: 'ArrowRight', code: 'ArrowRight', keyCode: 39 },
             { label: '↑', key: 'ArrowUp', code: 'ArrowUp', keyCode: 38 },
             { label: '↓', key: 'ArrowDown', code: 'ArrowDown', keyCode: 40 },
-
-            // Meta Keys
             { label: 'Enter', key: 'Enter', code: 'Enter', keyCode: 13 },
             { label: 'Esc', key: 'Escape', code: 'Escape', keyCode: 27 },
             { label: 'Tab', key: 'Tab', code: 'Tab', keyCode: 9 },
             { label: 'Del', key: 'Delete', code: 'Delete', keyCode: 46 },
         ];
 
-
-        // Default mappings (using key.code for robustness)
+        // Default mappings (kept the same)
         const DEFAULT_KEY_MAP = {
             'Up': { key: 'w', code: 'KeyW', keyCode: 87 },
             'Down': { key: 's', code: 'KeyS', keyCode: 83 },
@@ -623,13 +614,11 @@
         // Current key map state, initialized on load
         let keyMap = {}; 
 
-        // --- Key Binding Persistence (localStorage) ---
-
+        // --- Key Binding Persistence (localStorage) --- (Kept the same)
         function loadKeyMap() {
             try {
                 const storedMap = localStorage.getItem(KEY_MAP_STORAGE_KEY);
                 if (storedMap) {
-                    // Ensure the merged map contains all defaults if they weren't explicitly saved
                     keyMap = { ...DEFAULT_KEY_MAP, ...JSON.parse(storedMap) };
                 } else {
                     keyMap = DEFAULT_KEY_MAP;
@@ -643,39 +632,27 @@
 
         function saveKeyMap() {
             try {
-                // Only save the keys that differ from the default map to keep storage clean (optional)
-                const toSave = Object.keys(keyMap).reduce((acc, key) => {
-                    if (JSON.stringify(keyMap[key]) !== JSON.stringify(DEFAULT_KEY_MAP[key])) {
-                        acc[key] = keyMap[key];
-                    }
-                    return acc;
-                }, {});
                 localStorage.setItem(KEY_MAP_STORAGE_KEY, JSON.stringify(keyMap));
             } catch (e) {
                 console.error("Could not save key map to storage:", e);
             }
         }
 
-        // --- Key Binding UI & Logic ---
+        // --- Key Binding UI & Logic --- (Kept the same)
 
         function formatKeyDisplay(key) {
             if (key === ' ') return 'Space';
-            if (key.startsWith('Arrow')) return key.replace('Arrow', ''); // e.g., 'Right'
+            if (key.startsWith('Arrow')) return key.replace('Arrow', ''); 
             if (key === 'Control') return 'Ctrl';
-            if (key.length > 1) return key; // e.g., 'Enter' or 'Shift'
+            if (key.length > 1) return key; 
             return key.toUpperCase();
         }
 
-
         function renderKeyBindings() {
             bindingList.innerHTML = '';
-            
-            // Map the order of buttons for display
             const buttonOrder = ['Up', 'Down', 'Left', 'Right', 'A', 'B', 'Start', 'Select'];
-
             buttonOrder.forEach(label => {
                 const map = keyMap[label];
-                // Handle case where map might be missing (shouldn't happen with default merging)
                 const keyDisplay = map ? formatKeyDisplay(map.key) : 'N/A';
                 
                 const row = document.createElement('div');
@@ -689,8 +666,6 @@
                 `;
                 bindingList.appendChild(row);
             });
-            
-            // Render the manual key options grid
             renderManualKeyOptions();
         }
         
@@ -700,7 +675,6 @@
                 const btn = document.createElement('button');
                 btn.className = 'key-option-btn';
                 btn.textContent = opt.label;
-                // Use click/touchend for touch-friendly binding selection
                 btn.onclick = () => setManualBinding(opt); 
                 keyOptionsGrid.appendChild(btn);
             });
@@ -708,45 +682,38 @@
 
 
         function toggleKeyBindMenu(show) {
-            // If called without arguments, toggle the current state
             if (show === undefined) {
                 show = bindingMenu.style.display === 'none' || !bindingMenu.style.display;
             }
             
             if (show) {
-                // CRITICAL FIX: Ensure controls are reset when the menu is opened to prevent interference
+                // CRITICAL FIX: Ensure controls are reset when the menu is opened to prevent interference (Re-added)
                 resetControls(); 
                 
                 bindingMenu.style.display = 'flex';
-                // Hide manual options initially
                 manualKeyOptions.style.display = 'none'; 
                 
-                // Set up keyboard listener for desktop binding/ESC close
                 document.addEventListener('keydown', handleKeyBindingInput); 
                 document.addEventListener('keydown', closeMenuOnEscape); 
             } else {
                 bindingMenu.style.display = 'none';
-                // Reset state
                 isBindingMode = false;
                 bindingTargetLabel = null;
                 manualKeyOptions.style.display = 'none';
                 
-                // Remove listeners
                 document.removeEventListener('keydown', handleKeyBindingInput);
                 document.removeEventListener('keydown', closeMenuOnEscape);
                 
-                // Reset any active binding button's class
                 document.querySelectorAll('.key-bind-btn').forEach(btn => btn.classList.remove('binding'));
             }
         }
         
         function closeMenuOnEscape(e) {
             if (e.key === 'Escape') {
-                e.preventDefault(); // Prevent browser close/back behavior
+                e.preventDefault(); 
                 if (!isBindingMode) {
                     toggleKeyBindMenu(false);
                 }
-                // If in binding mode, ESC cancels binding
                 else if (isBindingMode) {
                     cancelBinding();
                 }
@@ -754,18 +721,15 @@
         }
 
         function cancelBinding() {
-            // Reset state
             isBindingMode = false;
             bindingTargetLabel = null;
             manualKeyOptions.style.display = 'none';
-            // Reset visual feedback on the button that was being bound
             document.querySelectorAll('.key-bind-btn').forEach(btn => btn.classList.remove('binding'));
             renderKeyBindings();
         }
 
         function startBinding(label) {
             if (isBindingMode) {
-                // If already binding, cancel the previous one first
                 cancelBinding();
             }
 
@@ -776,35 +740,27 @@
             button.textContent = 'Press Key / Tap Below';
             button.classList.add('binding');
             
-            // Show manual selection options
             manualKeyOptions.style.display = 'block';
         }
         
         function setManualBinding(keyData) {
             if (!isBindingMode || !bindingTargetLabel) return;
             
-            // Update the map
             keyMap[bindingTargetLabel] = {
                 key: keyData.key,
                 code: keyData.code,
                 keyCode: keyData.keyCode
             };
             
-            // Save and re-render
             saveKeyMap();
-            
-            // End binding mode
             isBindingMode = false;
             bindingTargetLabel = null;
             manualKeyOptions.style.display = 'none';
-            
-            // Re-render to show new key name
             renderKeyBindings(); 
         }
 
         function handleKeyBindingInput(e) {
             if (!isBindingMode || !bindingTargetLabel) return;
-            // Prevent default browser actions for the pressed key (e.g., Space scrolls)
             e.preventDefault();
             e.stopPropagation();
 
@@ -814,18 +770,12 @@
                 keyCode: e.keyCode
             };
 
-            // Update the map
             keyMap[bindingTargetLabel] = newKey;
             
-            // Save and re-render
             saveKeyMap();
-            
-            // End binding mode
             isBindingMode = false;
             bindingTargetLabel = null;
-            manualKeyOptions.style.display = 'none'; // Hide manual selector too
-            
-            // Re-render to show new key name
+            manualKeyOptions.style.display = 'none'; 
             renderKeyBindings();
         }
 
@@ -834,13 +784,12 @@
         
         /**
          * Resets the visual state of all emulator controls and clears the virtual key state
-         * to ensure no buttons are "stuck" in a pressed position, which can cause 
-         * phantom key events in the game. (CRITICAL FIX: Reset on Launch/Menu)
+         * to ensure no buttons are "stuck" in a pressed position. (CRITICAL FIX: Re-added)
          */
         function resetControls() {
             // 1. Reset D-Pad visuals
-            dpadHorz.classList.remove('pressed-arm');
-            dpadVert.classList.remove('pressed-arm');
+            if (dpadHorz) dpadHorz.classList.remove('pressed-arm');
+            if (dpadVert) dpadVert.classList.remove('pressed-arm');
 
             // 2. Reset round and pill button visuals
             actionButtons.forEach(btn => {
@@ -849,7 +798,7 @@
                 }
             });
 
-            // 3. Clear virtual key states (CRITICAL FIX)
+            // 3. Clear virtual key states
             virtualKeyStates = {};
 
             // 4. Ensure key binding mode is off
@@ -861,7 +810,7 @@
             
             if (isDown) {
                 element.classList.add('pressed');
-                // CRITICAL FIX: Prevent default browser behavior (like scrolling/text selection)
+                // CRITICAL FIX: Prevent default browser behavior 
                 if (e && (e.type === 'touchstart' || e.type === 'mousedown')) {
                     e.preventDefault(); 
                 }
@@ -870,7 +819,7 @@
             }
         }
         
-        // NEW: Handles the visual press for the D-Pad arms (CRITICAL FIX: Diagonal Flicker)
+        // NEW: Handles the visual press for the D-Pad arms (CRITICAL FIX: Diagonal Flicker re-added)
         function handleDpadVisual(label, isDown) {
             const pressClass = 'pressed-arm';
             
@@ -895,7 +844,7 @@
             }
         }
         
-        // Auto-Resize Logic for Mobile/Responsive
+        // Auto-Resize Logic for Mobile/Responsive (Uses the better calculation)
         function resizeConsole() {
             const wrapper = document.getElementById('console-wrapper');
             // Base dimensions must match CSS (.gbc-body)
@@ -919,7 +868,7 @@
         // Attach resize listeners
         window.addEventListener('resize', resizeConsole);
         window.addEventListener('load', () => {
-            loadKeyMap(); // Load keybindings on startup (includes renderKeyBindings)
+            loadKeyMap(); 
             resizeConsole();
         });
 
@@ -943,13 +892,13 @@
         function launchGame(fileName) {
             if (!uploadedGameContent) return;
             
-            // CRITICAL FIX 1: Reset all controls before launching the new game
+            // CRITICAL FIX 1: Reset all controls before launching the new game (Re-added)
             resetControls(); 
             
             // Ensure keybinding menu is closed when launching a game
             toggleKeyBindMenu(false); 
             
-            // 2. Clean up old game efficiently (PERFORMANCE FIX)
+            // 2. Clean up old game efficiently
             const existingIframe = document.getElementById('game-iframe');
             if (existingIframe) {
                 screenContainer.removeChild(existingIframe);
@@ -973,19 +922,17 @@
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        background-color: transparent; /* Changed to transparent */
+                        background-color: transparent; /* UPDATED: Use transparent to show parent screen color */
                     }
                     canvas {
-                        /* Use object-fit:contain to ensure the canvas scales correctly within the viewport */
                         max-width: 100% !important;
                         max-height: 100% !important;
                         object-fit: contain !important;
                         width: auto !important;
                         height: auto !important;
-                        /* Optional: Maintain crisp pixels for retro feel */
                         image-rendering: pixelated; 
                         image-rendering: crisp-edges;
-                        /* Force game canvas background to use the screen color variable */
+                        /* Optional: Force game canvas background to use the screen color variable */
                         background-color: var(--screen-color, #9bbc0f) !important;
                     }
                 </style>
@@ -993,12 +940,11 @@
                     // Listener to receive virtual button presses from the parent Nann console
                     window.addEventListener('message', function(event) {
                         const data = event.data;
+                        // CRITICAL FIX 3: Check for 'force_keyup' (Re-added)
                         if (data && (data.type === 'keydown' || data.type === 'keyup' || data.type === 'force_keyup')) {
                             
-                            // CRITICAL FIX 3: If it's a force_keyup, we explicitly use 'keyup' event
                             const eventType = data.type === 'force_keyup' ? 'keyup' : data.type;
 
-                            // Create a synthetic keyboard event based on the parent's message
                             const evt = new KeyboardEvent(eventType, {
                                 key: data.key, 
                                 code: data.code,
@@ -1009,7 +955,6 @@
                                 view: window
                             });
                             
-                            // Dispatch to all relevant targets for maximum compatibility
                             document.dispatchEvent(evt);
                             window.dispatchEvent(evt);
                             if(document.activeElement) document.activeElement.dispatchEvent(evt);
@@ -1022,7 +967,6 @@
             if (finalContent.includes('</body>')) {
                 finalContent = finalContent.replace('</body>', receiverScript + '</body>');
             } else {
-                // Fallback for files without a closing body tag
                 finalContent += receiverScript;
             }
 
@@ -1033,17 +977,14 @@
             iframe.id = 'game-iframe';
             iframe.src = currentObjectUrl;
             
-            // Use a strict sandbox to limit the game's access to the parent window, aiding performance and security
-            // CRITICAL FIX: Ensure the iframe is sandboxed correctly.
+            // CRITICAL FIX 4: Ensure the iframe is sandboxed correctly.
             iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-pointer-lock allow-same-origin');
             
-            // CRITICAL FIX 4: Wait for the iframe to load before sending the key-up reset
+            // CRITICAL FIX 5: Wait for the iframe to load before sending the key-up reset (Re-added)
             iframe.onload = () => {
-                // Find the mapping for the 'Up' button (which is 'W' by default)
                 const upKey = keyMap['Up'];
 
                 if (upKey && iframe.contentWindow) {
-                    // Send a special message to force the game to register the 'W' key as UP
                     iframe.contentWindow.postMessage({
                         type: 'force_keyup',
                         key: upKey.key,
@@ -1058,17 +999,16 @@
             fileNameDisplay.textContent = fileName;
         }
 
-        // Unified Handler for Game Input + Animation (CRITICAL FIX: State Tracking Added)
+        // Unified Handler for Game Input + Animation (CRITICAL FIX: State Tracking re-added)
         function handlePress(label, isDown, element = null, e = null) {
-            // 1. Handle Visual Press/Prevent Default (A, B, Start, Select)
+            // 1. Handle Visual Press/Prevent Default 
             if (element) {
                 handleVisualPress(element, isDown, e);
             } else if (e && (e.type === 'touchstart' || e.type === 'mousedown')) {
-                // Ensure D-Pad presses also prevent default behavior on press
                 e.preventDefault();
             }
             
-            // 2. Handle D-Pad Visuals (Up, Down, Left, Right)
+            // 2. Handle D-Pad Visuals
             handleDpadVisual(label, isDown); 
 
             // 3. Send Key Event - NOW WITH STATE TRACKING
@@ -1084,7 +1024,7 @@
                     virtualKeyStates[label] = false;
                     sendKey(label, false); // Send keyup
                 }
-                // If the state hasn't changed (e.g., repeating mousedown or redundant touchend), do nothing.
+                // If the state hasn't changed, do nothing.
             }
         }
 
@@ -1092,7 +1032,6 @@
             const iframe = document.getElementById('game-iframe');
             if (!iframe || !iframe.contentWindow || isBindingMode) return;
             
-            // Use the mapped key from the keyMap object
             const mappedKey = keyMap[label];
             if (!mappedKey) return;
 
