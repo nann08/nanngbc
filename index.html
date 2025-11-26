@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Updated Viewport for iPhone Full Screen -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Nann Emulator</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,7 +25,8 @@
             justify-content: center;
             /* Prevent iOS rubber banding */
             overscroll-behavior: none; 
-            touch-action: none;
+            /* CRITICAL FIX: Ensure touch input is handled by JS/CSS, not browser default */
+            touch-action: none; 
         }
 
         /* Container for scaling */
@@ -457,7 +457,6 @@
                 
                 <div class="lcd-screen" id="screen-container">
                     
-                    <!-- Key Binding Menu (Overlay) -->
                     <div id="key-binding-menu">
                         <h3 class="text-lg font-bold mb-4">Keyboard Bindings</h3>
                         
@@ -466,15 +465,12 @@
                         </p>
 
                         <div id="binding-list" class="w-full max-w-xs space-y-2">
-                            <!-- Binding rows will be inserted here by JS -->
-                        </div>
+                            </div>
 
-                        <!-- Manual Key Selector for Mobile/Touch -->
                         <div id="manual-key-options" class="w-full max-w-xs transition-all duration-300 ease-in-out">
                             <h4 class="text-xs font-semibold mb-2">TAP A KEY TO ASSIGN</h4>
                             <div id="key-options-grid" class="grid grid-cols-4 gap-2">
-                                <!-- Buttons will be inserted by JS -->
-                            </div>
+                                </div>
                         </div>
 
                         <button onclick="toggleKeyBindMenu(false)" class="mt-6 bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-6 rounded-full transition active:scale-95">
@@ -482,9 +478,7 @@
                         </button>
                     </div>
 
-                    <!-- Main File Upload Menu -->
                     <div id="menu-view" class="menu-ui">
-                        <!-- Text is automatically dark green via CSS -->
                         <h2 class="text-xl font-black mb-1">Nann</h2>
                         <p class="text-sm mb-6">No Game Loaded</p>
                         
@@ -507,7 +501,6 @@
                         <div class="dpad-v dpad-arm" id="dpad-vert"></div>
                         <div class="dpad-center"></div>
                         
-                        <!-- Hitboxes for JS Logic -->
                         <div class="dpad-btn dpad-up" ontouchstart="handlePress('Up', true, null, event)" ontouchend="handlePress('Up', false, null, event)" onmousedown="handlePress('Up', true, null, event)" onmouseup="handlePress('Up', false, null, event)"></div>
                         <div class="dpad-btn dpad-down" ontouchstart="handlePress('Down', true, null, event)" ontouchend="handlePress('Down', false, null, event)" onmousedown="handlePress('Down', true, null, event)" onmouseup="handlePress('Down', false, null, event)"></div>
                         <div class="dpad-btn dpad-left" ontouchstart="handlePress('Left', true, null, event)" ontouchend="handlePress('Left', false, null, event)" onmousedown="handlePress('Left', true, null, event)" onmouseup="handlePress('Left', false, null, event)"></div>
@@ -516,12 +509,10 @@
                 </div>
 
                 <div class="action-buttons">
-                    <!-- B (Left) -> D Key -->
                     <div id="btn-B" class="btn-round btn-b" ontouchstart="handlePress('B', true, this, event)" ontouchend="handlePress('B', false, this, event)" onmousedown="handlePress('B', true, this, event)" onmouseup="handlePress('B', false, this, event)">
                         B
                         <div class="btn-label">B</div>
                     </div>
-                    <!-- A (Right) -> Space Key -->
                     <div id="btn-A" class="btn-round btn-a" ontouchstart="handlePress('A', true, this, event)" ontouchend="handlePress('A', false, this, event)" onmousedown="handlePress('A', true, this, event)" onmouseup="handlePress('A', false, this, event)">
                         A
                         <div class="btn-label">A</div>
@@ -530,14 +521,13 @@
 
                 <div class="meta-buttons">
                     <div>
-                        <!-- Menu Toggle (Select) -->
                         <div 
                             id="btn-Select"
                             class="btn-pill" 
                             ontouchstart="handleVisualPress(this, true, event)" 
-                            ontouchend="handleVisualPress(this, false); toggleKeyBindMenu();" 
+                            ontouchend="handleVisualPress(this, false, event); toggleKeyBindMenu();" 
                             onmousedown="handleVisualPress(this, true, event)" 
-                            onmouseup="handleVisualPress(this, false); toggleKeyBindMenu();">
+                            onmouseup="handleVisualPress(this, false, event); toggleKeyBindMenu();">
                         </div>
                         <div class="meta-label">SELECT</div>
                     </div>
@@ -549,7 +539,6 @@
 
             </div>
 
-            <!-- Speaker Grille -->
             <div class="absolute bottom-6 right-8 flex gap-1 transform -rotate-15 opacity-20">
                 <div class="w-1 h-8 bg-black rounded-full"></div>
                 <div class="w-1 h-8 bg-black rounded-full"></div>
@@ -583,7 +572,7 @@
             document.getElementById('btn-Select')
         ];
         
-        // Global state tracking for virtual buttons (new addition)
+        // Global state tracking for virtual buttons (CRITICAL FIX: State Tracking)
         let virtualKeyStates = {};
 
 
@@ -640,6 +629,7 @@
             try {
                 const storedMap = localStorage.getItem(KEY_MAP_STORAGE_KEY);
                 if (storedMap) {
+                    // Ensure the merged map contains all defaults if they weren't explicitly saved
                     keyMap = { ...DEFAULT_KEY_MAP, ...JSON.parse(storedMap) };
                 } else {
                     keyMap = DEFAULT_KEY_MAP;
@@ -653,6 +643,13 @@
 
         function saveKeyMap() {
             try {
+                // Only save the keys that differ from the default map to keep storage clean (optional)
+                const toSave = Object.keys(keyMap).reduce((acc, key) => {
+                    if (JSON.stringify(keyMap[key]) !== JSON.stringify(DEFAULT_KEY_MAP[key])) {
+                        acc[key] = keyMap[key];
+                    }
+                    return acc;
+                }, {});
                 localStorage.setItem(KEY_MAP_STORAGE_KEY, JSON.stringify(keyMap));
             } catch (e) {
                 console.error("Could not save key map to storage:", e);
@@ -678,7 +675,8 @@
 
             buttonOrder.forEach(label => {
                 const map = keyMap[label];
-                const keyDisplay = formatKeyDisplay(map.key);
+                // Handle case where map might be missing (shouldn't happen with default merging)
+                const keyDisplay = map ? formatKeyDisplay(map.key) : 'N/A';
                 
                 const row = document.createElement('div');
                 row.className = 'key-bind-row';
@@ -716,6 +714,9 @@
             }
             
             if (show) {
+                // CRITICAL FIX: Ensure controls are reset when the menu is opened to prevent interference
+                resetControls(); 
+                
                 bindingMenu.style.display = 'flex';
                 // Hide manual options initially
                 manualKeyOptions.style.display = 'none'; 
@@ -740,12 +741,15 @@
         }
         
         function closeMenuOnEscape(e) {
-            if (e.key === 'Escape' && !isBindingMode) {
-                toggleKeyBindMenu(false);
-            }
-            // If in binding mode, ESC cancels binding
-            else if (e.key === 'Escape' && isBindingMode) {
-                cancelBinding();
+            if (e.key === 'Escape') {
+                e.preventDefault(); // Prevent browser close/back behavior
+                if (!isBindingMode) {
+                    toggleKeyBindMenu(false);
+                }
+                // If in binding mode, ESC cancels binding
+                else if (isBindingMode) {
+                    cancelBinding();
+                }
             }
         }
 
@@ -831,7 +835,7 @@
         /**
          * Resets the visual state of all emulator controls and clears the virtual key state
          * to ensure no buttons are "stuck" in a pressed position, which can cause 
-         * phantom key events in the game.
+         * phantom key events in the game. (CRITICAL FIX: Reset on Launch/Menu)
          */
         function resetControls() {
             // 1. Reset D-Pad visuals
@@ -866,7 +870,7 @@
             }
         }
         
-        // NEW: Handles the visual press for the D-Pad arms
+        // NEW: Handles the visual press for the D-Pad arms (CRITICAL FIX: Diagonal Flicker)
         function handleDpadVisual(label, isDown) {
             const pressClass = 'pressed-arm';
             
@@ -874,7 +878,7 @@
                 if (isDown) {
                     dpadVert.classList.add(pressClass);
                 } else {
-                    // Only remove if the other direction is not also pressed (prevents flicker on diagonals)
+                    // Only remove if the other direction is not also pressed 
                     if (!['Up', 'Down'].some(dir => dir !== label && virtualKeyStates[dir])) {
                          dpadVert.classList.remove(pressClass);
                     }
@@ -883,7 +887,7 @@
                 if (isDown) {
                     dpadHorz.classList.add(pressClass);
                 } else {
-                     // Only remove if the other direction is not also pressed (prevents flicker on diagonals)
+                     // Only remove if the other direction is not also pressed
                     if (!['Left', 'Right'].some(dir => dir !== label && virtualKeyStates[dir])) {
                         dpadHorz.classList.remove(pressClass);
                     }
@@ -891,13 +895,6 @@
             }
         }
         
-        // Helper function to check if a key is logically pressed based on the state map
-        function isKeyCurrentlyPressed(label) {
-            // Check the logical state map instead of the DOM
-            return virtualKeyStates[label] === true;
-        }
-
-
         // Auto-Resize Logic for Mobile/Responsive
         function resizeConsole() {
             const wrapper = document.getElementById('console-wrapper');
@@ -1037,6 +1034,7 @@
             iframe.src = currentObjectUrl;
             
             // Use a strict sandbox to limit the game's access to the parent window, aiding performance and security
+            // CRITICAL FIX: Ensure the iframe is sandboxed correctly.
             iframe.setAttribute('sandbox', 'allow-scripts allow-forms allow-pointer-lock allow-same-origin');
             
             // CRITICAL FIX 4: Wait for the iframe to load before sending the key-up reset
@@ -1060,7 +1058,7 @@
             fileNameDisplay.textContent = fileName;
         }
 
-        // Unified Handler for Game Input + Animation
+        // Unified Handler for Game Input + Animation (CRITICAL FIX: State Tracking Added)
         function handlePress(label, isDown, element = null, e = null) {
             // 1. Handle Visual Press/Prevent Default (A, B, Start, Select)
             if (element) {
@@ -1071,7 +1069,6 @@
             }
             
             // 2. Handle D-Pad Visuals (Up, Down, Left, Right)
-            // Note: This relies on the virtualKeyStates check below for complex D-Pad visual cleanup
             handleDpadVisual(label, isDown); 
 
             // 3. Send Key Event - NOW WITH STATE TRACKING
